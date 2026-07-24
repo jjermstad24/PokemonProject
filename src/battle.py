@@ -2,7 +2,7 @@ from typing import Optional
 
 from src.pokemon import Pokemon
 from src.trainer import Trainer
-
+from src.move import Move
 
 class Battle:
     def __init__(self, player: Trainer, opponent: Trainer):
@@ -15,3 +15,6 @@ class Battle:
 
     def is_over(self) -> bool:
         return self.winner is not None
+
+    def execute_turn(self, player_move: Move, opponent_move: Move):
+        return None

@@ -1,4 +1,5 @@
 from src.ptype import Type
+from src.move import Move
 
 
 class Pokemon:
@@ -9,14 +10,17 @@ class Pokemon:
         self.current_hp = hp
         self.attack = attack
         self.defense = defense
-        self.moves = []
+        self.moves = list[Move]()
         self.fainted = False
         self.level = 5
 
     @classmethod
     def from_species(cls, species: str, level: int = 5):
-        pokemon = cls(species, Type.NORMAL, 1, 1, 1)
+        from src.pokemon_data import POKEMON_DATA, MOVE_DATA
+        pokemon = cls(species, POKEMON_DATA[species]['primary_type'], POKEMON_DATA[species]['base_hp'], POKEMON_DATA[species]['base_attack'], POKEMON_DATA[species]['base_defense'])
         pokemon.level = level
+        pokemon.moves = [MOVE_DATA[move] for move in POKEMON_DATA[species]['moves']]
+    
         return pokemon
 
     @property
